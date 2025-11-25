@@ -58,10 +58,10 @@
   (->output! "**IMPORTANT** no CSRF token in init config, default Sente config will reject requests!"))
 
 (def chsk-type
-  "We'll select a random protocol for this example"
-  (if (>= (rand) 0.5) :ajax :auto))
+  "We'll select a websocket protocol for this example"
+  :ws)
 
-(->output! "Randomly selected chsk type: %s" chsk-type)
+(->output! "Selected chsk type: %s" chsk-type)
 (->output!)
 
 (def packer
