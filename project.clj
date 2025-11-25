@@ -19,7 +19,8 @@
    [com.taoensso/telemere       "1.1.0"] ; Optional, for logging
 
    ;; Choose (uncomment) a supported web server --------------
-   [http-kit "2.8.1"] ; Default
+   [http-kit/http-kit "2.9.0-beta3"] ;; Latest beta, with pre-ws-handshake feature patch
+   ;; [http-kit "2.8.1"] ; Default
    ;; [org.immutant/web "x.y.z" :exclusions [ring/ring-core]]
    ;; [nginx-clojure/nginx-clojure-embed "x.y.z"]
    ;; [aleph "x.y.z"]
