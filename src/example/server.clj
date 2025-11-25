@@ -66,9 +66,15 @@
   (example.dynamic-packer/get-packer) ; For testing
   )
 
+(defonce csrf-token (str (random-uuid)))
+
+(defn- csrf-token-fn
+  [_req]
+  csrf-token)
+
 (defonce chsk-server
   (sente/make-channel-socket-server!
-    (get-sch-adapter) {:packer packer}))
+    (get-sch-adapter) {:packer packer, :csrf-token-fn csrf-token-fn}))
 
 (let [{:keys [ch-recv send-fn connected-uids_ private
               ajax-post-fn ajax-get-or-ws-handshake-fn]}
@@ -96,7 +102,7 @@
     [:div#init-config
      {:data-edn
       (encore/pr-edn
-        {:csrf-token    (or (get ring-req :anti-forgery-token) (force anti-forgery/*anti-forgery-token*))
+        {:csrf-token    (csrf-token-fn ring-req)
          :min-log-level @min-log-level_
          :packer-mode   @example.dynamic-packer/mode_})}]
 
